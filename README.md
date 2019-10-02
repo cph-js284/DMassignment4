@@ -2,11 +2,10 @@
 
 # What is it
 This is a C# app running in a docker container(requires docker installed).<br>
-The app is a statemachine that parses a text-file and outputs appropriate information to the console.<br>
-If an illegale statechange is detected an exception is thrown.<br>
+The app is a statemachine that parses a stream of data (from a text-file) and outputs appropriate information to the console.<br>
 <br>
-The files are in the following format: <b>sessionID:actionID</b><br>
-States dentoed by intergers could be translated to:<br>
+The text-files are in the following format: <b>sessionID:actionID</b><br>
+sessionID is used to differentiate between multiple session running simultaniously and ActionID dentoed by intergers could be translated to:<br>
 ```
 0 not logged in
 1 login
@@ -14,7 +13,7 @@ States dentoed by intergers could be translated to:<br>
 3 show list
 4 logout
 ``` 
-Heres a file containing all legal actions:
+Contense of logfilSucces.txt - containing all legal actions:
 ```
 1:1             //user 1 logs in
 1:2             //user 1 edits data
@@ -24,7 +23,7 @@ Heres a file containing all legal actions:
 2:3             //user 2 show list
 2:4             //user 2 logs out
 ```
-Heres a file containing an illegal action:
+Contense of logfilFail.txt - containing an illegal action:
 ```
 1:1             //user 1 logs in
 2:1             //user 2 logs in
