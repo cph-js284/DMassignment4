@@ -32,7 +32,7 @@ Heres a file containing an illegal action:
 1:2             //user 1 edits data ! this action is illegal due to already being logged out
 ```
 # Simulation
-To simulate the runtime use of the system sending the actions, useractions will be streamed async to the atomatron.
+To simulate the realtime use of a system sending the actions, useractions will be streamed asyncronously from the text-file to the atomatron.
 
 # Making it go
 To run the app execute command and follow instruction on screen
