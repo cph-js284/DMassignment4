@@ -31,7 +31,6 @@ Heres a file containing an illegal action:
 1:4             //user 1 logs out
 1:2             //user 1 edits data ! this action is illegal due to already being logged out
 ```
-<br>
 # Simulation
 To simulate the runtime use of the system sending the actions, useractions will be streamed async to the atomatron.
 
