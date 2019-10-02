@@ -1,33 +1,47 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace DMassignment4
 {
+
+
     public class Automatron
     {
-        
-        Dictionary<int, StateModel> state = new Dictionary<int, StateModel>();
 
-        public void ParseLog(int choice){
+        //simulating realtime input
+        public static async IAsyncEnumerable<string> logAsync(int choice){
             string[] lines;
             if(choice == 1)
                 lines = File.ReadAllLines("logfilSucces.txt");
             else
                 lines = File.ReadAllLines("logfilFail.txt");
 
-            
             foreach (var item in lines)
             {
+                await Task.Delay(1000);
+                yield return item;            
+            }
+
+        }
+
+        
+
+        Dictionary<int, StateModel> state = new Dictionary<int, StateModel>();
+
+        public async Task ParseLogAsync(int choice){
+
+            await foreach (var logEntry in logAsync(choice))
+            {
                 var newState = new StateModel(){
-                    Session=int.Parse(item.Split(':')[0]),
-                    Action=int.Parse(item.Split(':')[1]),
-                    UnixTimeStamp=int.Parse(item.Split(':')[2]),
+                    Session=int.Parse(logEntry.Split(':')[0]),
+                    Action=int.Parse(logEntry.Split(':')[1]),
                 };
                 
                 if(!state.ContainsKey(newState.Session)){
                     state.Add(newState.Session,
-                        new StateModel(){Session=newState.Session, Action=0, UnixTimeStamp=newState.UnixTimeStamp}
+                        new StateModel(){Session=newState.Session, Action=0}
                     );
                 }
                 if(Allowed(state[newState.Session].Action,newState.Action)){
@@ -37,8 +51,7 @@ namespace DMassignment4
                 {
                     System.Console.WriteLine($"Illegal state change cant execute action from {state[newState.Session].Action} to {newState.Action}");
                 }
-                
-            }
+            }                
 
         }
 
