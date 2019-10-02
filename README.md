@@ -31,7 +31,6 @@ Heres a file containing an illegal action:
 1:4:6429        //user 1 logs out
 1:2:7486        //user 1 edits data ! this action is illegal due to already being logged out
 ```
-<br>
 # Making it go
 To run the app execute command and follow instruction on screen
 ```
